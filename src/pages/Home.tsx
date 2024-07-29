@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { LibraryBanner } from "../components";
+import AppStoreBanner from "../components/Banners/AppStoreBanner";
+import TestimonialsBanner from "../components/Banners/TestimonialsBanner";
+import BestBooks from "../components/BestBooks/BestBooks";
+import Hero from "../components/Hero/Hero";
+import TopBooks from "../components/TopBooks/TopBooks";
 
 const Home = () => {
-  const [password, setPassword] = useState(true);
-
-  const handleBtn = () => {
-    setPassword((prev) => !prev);
-  };
   return (
     <div>
-      <input type={password ? "password" : "text"} />
-      <button onClick={handleBtn}>{password ? "show" : "hide"}</button>
+      <Hero />
+      <BestBooks />
+      <LibraryBanner />
+      <AppStoreBanner />
+      <TopBooks />
+      <TestimonialsBanner />
     </div>
   );
 };

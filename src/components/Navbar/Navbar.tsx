@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import DarkMode from "./DarkMode";
+import Button from "../Button";
 
 const navItems = [
   {
@@ -40,18 +41,18 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="container w-full sticky top-0 flex justify-between bg-white shadow-lg">
-      <div className="py-3">
+    <header className="container flex justify-between items-center py-4 bg-white shadow-lg dark:bg-gray-900 dark:text-white duration-300">
+      <div className="ml-3">
         <Link to="/" className="flex justify-between items-center gap-2">
           <img src={Logo} alt="books" className="w-12 inline-block" />
           <span className="font-bold text-2xl sm:text-3xl">Books</span>
         </Link>
       </div>
-      <div className="flex items-center p-3 gap-8">
+      <div className="flex items-center justify-center gap-8">
         <div>
           <DarkMode />
         </div>
-        <ul className="flex justify-center list-none gap-8">
+        <ul className="hidden sm:flex justify-center list-none gap-8">
           {navItems.map((item) => (
             <li
               key={item.id}
@@ -70,7 +71,7 @@ const Navbar = () => {
               </span>
             </Link>
             {/* Dropdown link section */}
-            <div className="absolute hidden group-hover:block text-black bg-white p-2 shadow-md">
+            <div className="absolute hidden group-hover:block text-black bg-white dark:text-white dark:bg-gray-900 p-2 shadow-md rounded-2xl">
               <ul className="flex flex-col w-max">
                 {dropdownItems.map((item) => (
                   <li
@@ -85,12 +86,15 @@ const Navbar = () => {
             </div>
           </li>
         </ul>
-        <button className="bg-gradient-to-r from-primary to-secondary py-1 px-4 rounded-full text-white flex items-center gap-2 cursor-pointer hover:scale-105 duration-300 ">
+        <Button
+          type="button"
+          className="flex items-center justify-center gap-2"
+        >
           Order
           <span>
             <FaCartShopping />
           </span>
-        </button>
+        </Button>
       </div>
     </header>
   );
