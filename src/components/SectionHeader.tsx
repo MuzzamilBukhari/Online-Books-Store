@@ -7,7 +7,7 @@ const SectionHeader = ({
   first: string;
   heading: string;
   tagline: string;
-  transition: string;
+  transition?: string;
 }) => {
   return (
     <div
