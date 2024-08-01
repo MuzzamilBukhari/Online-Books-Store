@@ -11,7 +11,7 @@ const SectionHeader = ({
 }) => {
   return (
     <div
-      className="flex flex-col justify-center items-center max-w-[400px] "
+      className="flex flex-col justify-center items-center max-w-[400px] px-2 "
       data-aos={transition}
       data-aos-duration="1000"
     >

@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="">
           <SocialInfo />
         </div>
-        <div className="flex justify-center items-center flex-wrap gap-20 ">
+        <div className="flex flex-wrap gap-12 ">
           <div>
             <QuickLinks />
           </div>

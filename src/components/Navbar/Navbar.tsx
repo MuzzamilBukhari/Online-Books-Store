@@ -42,7 +42,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="container flex justify-between items-center py-4 bg-white shadow-lg dark:bg-gray-900 dark:text-white duration-300">
+    <header className="container flex justify-between items-center py-4 px-2  bg-white shadow-lg dark:bg-gray-900 dark:text-white duration-300">
       <div className="ml-3">
         <Link to="/" className="flex justify-between items-center gap-2">
           <img src={Logo} alt="books" className="w-12 inline-block" />
