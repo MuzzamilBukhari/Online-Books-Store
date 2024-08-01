@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import useBooksInfo, { Book } from "../../hooks/useBookInfo";
-import BestBookCard from "./BestBookCard";
-import SectionHeader from "../SectionHeader";
+import { BestBookCard, SectionHeader } from "../";
 
 const BestBooks = () => {
   const [books, setBooks] = useState<Book[] | undefined>();

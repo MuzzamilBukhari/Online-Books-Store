@@ -1,4 +1,4 @@
-import { book1, book2, book3 } from "../assets/books";
+import { book1, book2, book3 } from "../assets/";
 
 export interface Book {
   id: number;

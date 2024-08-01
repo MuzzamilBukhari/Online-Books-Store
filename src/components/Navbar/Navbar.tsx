@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import Logo from "../../assets/website/logo.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Logo } from "../../assets/";
 import { FaCaretDown } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
-import DarkMode from "./DarkMode";
-import Button from "../Button";
+import { DarkMode, Button } from "../";
+import { useDispatch } from "react-redux";
+import { openPopup } from "../../store/popupSlice";
 
 const navItems = [
   {
@@ -38,6 +38,7 @@ const dropdownItems = [
 ];
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (
@@ -71,12 +72,12 @@ const Navbar = () => {
               </span>
             </Link>
             {/* Dropdown link section */}
-            <div className="absolute hidden group-hover:block text-black bg-white dark:text-white dark:bg-gray-900 p-2 shadow-md rounded-2xl">
+            <div className="absolute hidden group-hover:block text-black bg-white dark:text-white dark:bg-gray-900 p-2 shadow-md rounded-2xl z-10">
               <ul className="flex flex-col w-max">
                 {dropdownItems.map((item) => (
                   <li
                     key={item.id}
-                    className="p-2 inline-block rounded-md hover:bg-primary/20 cursor-pointer "
+                    className="p-2 inline-block rounded-md hover:bg-primary/20 cursor-pointer"
                     onClick={() => navigate(item.slug)}
                   >
                     {item.name}
@@ -89,6 +90,7 @@ const Navbar = () => {
         <Button
           type="button"
           className="flex items-center justify-center gap-2"
+          onClick={() => dispatch(openPopup())}
         >
           Order
           <span>

@@ -3,7 +3,11 @@ import { Book } from "../../hooks/useBookInfo";
 
 const TopBookCard = ({ book }: { book: Book }) => {
   return (
-    <div className="flex justify-center gap-1/2 flex-col">
+    <div
+      className="flex justify-center gap-1/2 flex-col"
+      data-aos="slide-up"
+      data-aos-duration="800"
+    >
       <img
         src={book.imageId}
         alt="image"

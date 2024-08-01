@@ -1,9 +1,12 @@
 import { LibraryBanner } from "../components";
-import AppStoreBanner from "../components/Banners/AppStoreBanner";
-import TestimonialsBanner from "../components/Banners/TestimonialsBanner";
-import BestBooks from "../components/BestBooks/BestBooks";
-import Hero from "../components/Hero/Hero";
-import TopBooks from "../components/TopBooks/TopBooks";
+import {
+  AppStoreBanner,
+  TestimonialsBanner,
+  BestBooks,
+  Hero,
+  TopBooks,
+} from "../components/";
+import Popup from "../components/Popups/Popup";
 
 const Home = () => {
   return (
@@ -14,6 +17,7 @@ const Home = () => {
       <AppStoreBanner />
       <TopBooks />
       <TestimonialsBanner />
+      <Popup />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import Banner from "../../assets/website/board.png";
-import GooglePlay from "../../assets/website/play_store.png";
-import AppStore from "../../assets/website/app_store.png";
+import { playstore, appStore } from "../../assets/";
 
 const bgImage = {
   backgroundImage: `url(${Banner})`,
@@ -17,17 +16,25 @@ const AppStoreBanner = () => {
       className=" flex justify-center items-center flex-col w-full text-white gap-6 py-12"
       style={bgImage}
     >
-      <h1 className="text-2xl lg:text-4xl sm:text-3xl font-bold">
+      <h1
+        className="text-2xl lg:text-4xl sm:text-3xl font-bold"
+        data-aos="fade-up"
+        data-aos-anchor-placement="top-bottom"
+      >
         Read Books at your fingertips
       </h1>
-      <div className="flex justify-center items-center gap-2">
+      <div
+        className="flex justify-center items-center gap-2"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
         <img
-          src={GooglePlay}
+          src={playstore}
           alt="play store"
           className="max-w-[150px] sm:max-w-[120px] md:max-w-[200px]"
         />
         <img
-          src={AppStore}
+          src={appStore}
           alt="app store"
           className="max-w-[150px] sm:max-w-[120px] md:max-w-[200px]"
         />

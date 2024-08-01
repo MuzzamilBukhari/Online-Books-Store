@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import { Button } from "../";
 import { FaStar } from "react-icons/fa";
+import { openPopup } from "../../store/popupSlice";
 
 const BestBookCard = ({
   title,
@@ -10,8 +12,13 @@ const BestBookCard = ({
   description: string;
   imageId: string;
 }) => {
+  const dispatch = useDispatch();
   return (
-    <div className="flex items-center justify-center flex-col group rounded-2xl  bg-white dark:bg-gray-800 group-hover:bg-primary duration-200">
+    <div
+      className="flex items-center justify-center flex-col group rounded-2xl  bg-white dark:bg-gray-800 group-hover:bg-primary duration-200"
+      data-aos="zoom-in"
+      data-aos-duration="800"
+    >
       <div className="relative bottom-12">
         <img src={imageId} className="w-[130px] h-[130px] object-contain " />
       </div>
@@ -29,6 +36,7 @@ const BestBookCard = ({
         <Button
           type="button"
           className="mt-3 group-hover:text-primary group-hover:bg-white"
+          onClick={() => dispatch(openPopup())}
         >
           Order now
         </Button>

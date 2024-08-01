@@ -1,18 +1,22 @@
 import { GrSecure } from "react-icons/gr";
-import LibraryImg from "../../assets/website/library.jpg";
+import { LibraryImg } from "../../assets/";
 
 const LibraryBanner = () => {
   return (
     <section className="min-h-[400px] flex justify-center flex-wrap items-center w-full bg-white text-black dark:bg-gray-900 dark:text-white py-10 px-7 sm:px-0 duration-200 gap-16">
       {/* image col */}
-      <div>
+      <div data-aos="zoom-in" data-aos-duration="600">
         <img
           src={LibraryImg}
           className="max-w-[400px] block mx-auto h-[350px] w-full drop-shadow-2xl object-cover"
         />
       </div>
       {/* text col */}
-      <div className="max-w-[450px] flex flex-col gap-3">
+      <div
+        className="max-w-[450px] flex flex-col gap-3"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+      >
         <h1 className="text-3xl lg:text-4xl font-bold">
           Library at your fingertips
         </h1>

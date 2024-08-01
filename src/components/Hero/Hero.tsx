@@ -1,11 +1,14 @@
-import Button from "../Button";
+import { Button } from "../";
 import useBooksInfo, { Book } from "../../hooks/useBookInfo";
-import Vector from "../../assets/website/blue-pattern.png";
+import { Vector } from "../../assets/";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { openPopup } from "../../store/popupSlice";
 
 const Hero = () => {
   const [books, setBooks] = useState<Book[] | undefined>();
   const [book, setBook] = useState<Book | undefined>();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setBooks(useBooksInfo());
@@ -30,15 +33,30 @@ const Hero = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2">
             {/* Text section */}
             <div className="flex flex-col justify-center px-5 pt-12 sm:pt-0 text-center sm:text-left order-2 sm:order-1 ">
-              <h1 className="text-5xl sm:text-6xl font-bold lg:text-7xl">
+              <h1
+                className="text-5xl sm:text-6xl font-bold lg:text-7xl"
+                data-aos="zoom-out"
+                data-aos-duration="500"
+              >
                 {book?.title}
                 <p className="bg-clip-text text-transparent bg-gradient-to-b from-primary text-right text-sm to-secondary">
                   By anonymous
                 </p>
               </h1>
-              <p>{book?.description}</p>
+              <p
+                data-aos="slide-up"
+                data-aos-duration="500"
+                data-aos-delay="100"
+              >
+                {book?.description}
+              </p>
               <div>
-                <Button type="button" className="mt-5">
+                <Button
+                  type="button"
+                  className="mt-5"
+                  transition="zoom-in"
+                  onClick={() => dispatch(openPopup())}
+                >
                   Order Now
                 </Button>
               </div>
@@ -46,7 +64,11 @@ const Hero = () => {
             {/* Image Section */}
             <div className="flex justify-center flex-col lg:flex-row items-center min-h-[450px] order-1 sm:order-2">
               {/* main image */}
-              <div className="min-h-72 flex justify-center items-center">
+              <div
+                className="min-h-72 flex justify-center items-center"
+                data-aos="zoom-in"
+                data-aos-duration="500"
+              >
                 <img
                   src={book?.imageId}
                   alt=""

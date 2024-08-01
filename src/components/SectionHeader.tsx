@@ -2,13 +2,19 @@ const SectionHeader = ({
   first,
   heading,
   tagline,
+  transition,
 }: {
   first: string;
   heading: string;
   tagline: string;
+  transition: string;
 }) => {
   return (
-    <div className="flex flex-col justify-center items-center max-w-[400px]">
+    <div
+      className="flex flex-col justify-center items-center max-w-[400px] "
+      data-aos={transition}
+      data-aos-duration="1000"
+    >
       <span className="bg-clip-text text-transparent bg-gradient-to-b from-primary to-secondary">
         {first}
       </span>
