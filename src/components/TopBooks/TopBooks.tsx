@@ -27,33 +27,36 @@ const TopBooks = () => {
   }
 
   // Load more books from next page
-  const handleLoadMore = async () => {
+  const handleLoadMore = () => {
     if (!currentNextUrl || loadingMore) return;
 
     setLoadingMore(true);
-    try {
-      const response = await fetch(currentNextUrl);
-      const data = await response.json();
-      
-      // Map new books to our format
-      const newBooks: Book[] = (data.results || []).map((b: any) => ({
-        id: b.id,
-        title: b.title,
-        description: b.subjects?.[0] || 'A classic work of literature from Project Gutenberg',
-        imageId: b.formats['image/jpeg'] || b.formats['image/jpg'] || 'https://via.placeholder.com/300x450?text=No+Cover',
-        rating: Math.min(5.0, Math.max(1.0, (b.download_count / 5000) + 3.5)),
-        authors: (b.authors || []).map((a: any) => a.name),
-        download_count: b.download_count,
-      }));
+    
+    // Fetch next page asynchronously
+    fetch(currentNextUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Map new books to our format
+        const newBooks: Book[] = (data.results || []).map((b: any) => ({
+          id: b.id,
+          title: b.title,
+          description: b.subjects?.[0] || 'A classic work of literature from Project Gutenberg',
+          imageId: b.formats['image/jpeg'] || b.formats['image/jpg'] || 'https://via.placeholder.com/300x450?text=No+Cover',
+          rating: Math.min(5.0, Math.max(1.0, (b.download_count / 5000) + 3.5)),
+          authors: (b.authors || []).map((a: any) => a.name),
+          download_count: b.download_count,
+        }));
 
-      // Append new books to existing ones
-      setAllBooks((prev) => [...prev, ...newBooks]);
-      setCurrentNextUrl(data.next || null);
-    } catch (err) {
-      console.error('Failed to load more books:', err);
-    } finally {
-      setLoadingMore(false);
-    }
+        // Append new books to existing ones
+        setAllBooks((prev) => [...prev, ...newBooks]);
+        setCurrentNextUrl(data.next || null);
+      })
+      .catch((err) => {
+        console.error('Failed to load more books:', err);
+      })
+      .finally(() => {
+        setLoadingMore(false);
+      });
   };
 
   return (
@@ -91,15 +94,19 @@ const TopBooks = () => {
             ))}
           </div>
 
-          {/* Load More button - only show if there's a next page */}
-          {currentNextUrl && (
+          {/* Load More button - only show if there's a next page and not currently loading */}
+          {currentNextUrl && !loadingMore && (
             <Button 
               type="button" 
               onClick={handleLoadMore}
-              disabled={loadingMore}
             >
-              {loadingMore ? 'Loading...' : 'Load More Books'}
+              Load More Books
             </Button>
+          )}
+          
+          {/* Show loading text when fetching more books */}
+          {loadingMore && (
+            <div className="text-lg">Loading more books...</div>
           )}
         </>
       )}
