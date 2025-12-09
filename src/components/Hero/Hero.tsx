@@ -1,19 +1,23 @@
 import { Button } from "../";
-import useBooksInfo, { Book } from "../../hooks/useBookInfo";
+import useBooksInfo from "../../hooks/useBookInfo";
 import { Vector } from "../../assets/";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { openPopup } from "../../store/popupSlice";
+import { Book } from "../../hooks/useBooks";
 
 const Hero = () => {
-  const [books, setBooks] = useState<Book[] | undefined>();
-  const [book, setBook] = useState<Book | undefined>();
+  // Fetch books from Gutendex API with loading and error states
+  const { books, loading, error } = useBooksInfo();
+  const [selectedBook, setSelectedBook] = useState<Book | undefined>();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setBooks(useBooksInfo());
-    if (books) setBook(books[0]);
-  }, [books]);
+    // Set the first book as the selected book when data loads
+    if (books && books.length > 0 && !selectedBook) {
+      setSelectedBook(books[0]);
+    }
+  }, [books, selectedBook]);
 
   const bgImage = {
     backgroundImage: `url(${Vector})`,
@@ -22,6 +26,30 @@ const Hero = () => {
     backgroundSize: "cover",
     width: "100%",
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div
+        className="flex justify-center items-center p-6 min-h-[550px] sm:min-h-[650] bg-gray-100 dark:bg-gray-950 dark:text-white duration-200"
+        style={bgImage}
+      >
+        <div className="text-lg">Loading...</div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div
+        className="flex justify-center items-center p-6 min-h-[550px] sm:min-h-[650] bg-gray-100 dark:bg-gray-950 dark:text-white duration-200"
+        style={bgImage}
+      >
+        <div className="text-lg text-red-500">Failed to load books.</div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -38,9 +66,9 @@ const Hero = () => {
                 data-aos="zoom-out"
                 data-aos-duration="500"
               >
-                {book?.title}
+                {selectedBook?.title}
                 <p className="bg-clip-text text-transparent bg-gradient-to-b from-primary text-right text-sm to-secondary">
-                  By anonymous
+                  By {selectedBook?.authors?.[0] || 'Anonymous'}
                 </p>
               </h1>
               <p
@@ -48,7 +76,7 @@ const Hero = () => {
                 data-aos-duration="500"
                 data-aos-delay="100"
               >
-                {book?.description}
+                {selectedBook?.description}
               </p>
               <div>
                 <Button
@@ -70,20 +98,21 @@ const Hero = () => {
                 data-aos-duration="500"
               >
                 <img
-                  src={book?.imageId}
-                  alt=""
+                  src={selectedBook?.imageId}
+                  alt={selectedBook?.title || 'Book cover'}
                   className="w-[300px] h-[300px] sm:w-[450px] sm:h-[450px] hover:scale-105 duration-300 object-contain mx-auto"
                 />
               </div>
               {/* other images list */}
               <div className="flex gap-3 items-center justify-center bg-white rounded-full relative top-4 sm:bottom-4 lg:flex-col">
-                {books?.map((book) => (
+                {books?.slice(0, 3).map((book) => (
                   <img
                     src={book.imageId}
                     key={book.id}
-                    className="max-w-[100px] h-[100px] object-contain hover:scale-110 duration-200 inline-block"
+                    alt={book.title}
+                    className="max-w-[100px] h-[100px] object-contain hover:scale-110 duration-200 inline-block cursor-pointer"
                     onClick={() => {
-                      setBook(book);
+                      setSelectedBook(book);
                     }}
                   />
                 ))}
